@@ -97,6 +97,7 @@ body{
     
     transform: translateX(-15px);
     margin: 2px;
+    z-index: 2px;
 }
 
 .green{
