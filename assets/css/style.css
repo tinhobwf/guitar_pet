@@ -1,0 +1,95 @@
+*{padding: 0; margin: 0;}
+
+
+body{
+    overflow: hidden;
+}
+
+.container{
+    height: 100vh;
+    width: 100%;
+}
+
+#points{
+    position: fixed;
+    background-color: white;
+    height: 40px;
+    width: 100px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.start_up{
+    height: 100vh;
+    width: 100%;
+    background-color: black;
+
+    background-image: url('../img/background_guitar_cats.jpg');
+    background-position:bottom;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    
+    filter:brightness(30%);
+
+    display: none;
+}
+
+.game{
+    height: 100vh;
+    width: 100%;
+    background-color: black;
+
+    display: flex;
+    align-items: start;
+    justify-content: center;
+}
+
+.game header{
+    width: 40%;
+    height: 100%;
+    background-color: black;
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.game header .gerador{
+    background-color: grey;
+    width: 9%;
+    height: 100%;
+
+
+
+    display: block;
+    justify-content: center;
+}
+
+.game header .gerador .partitura{
+    background-color: green;
+
+    width: 30px;
+    height: 5%; 
+    position:absolute;
+ 
+    margin: 2px;
+}
+
+/* #gravity{
+    animation: gravity 1s;
+    animation-timing-function:linear;
+    position: relative;
+}
+
+@keyframes gravity {
+    0%{
+        top: 0px;
+
+    }
+
+    100%{
+        top: 95%;
+    }
+} */
