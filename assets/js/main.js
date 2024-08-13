@@ -19,7 +19,6 @@ class Position {
 class Game {
     constructor(){
         this.gerador = document.querySelectorAll('.gerador');
-        this.SheetsGeradas = document.querySelector('.Sheet');
         this.points = document.querySelector('#points');
 
         this.count = 0;
@@ -27,15 +26,15 @@ class Game {
 
         this.positionsOfMatriz = [];
         this.matriz = [
-            [ 1, 1, 0, 0],
-            [ 0, 0, 0, 1],
-            [ 0, 0, 1, 0],
-            [ 0, 1, 0, 0],
-            [ 1, 0, 0, 0],
-            [ 0, 1, 0, 0],
-            [ 1, 0, 0, 0],
-            [ 0, 0, 0, 1],
-            [ 1, 0, 0, 0],
+            [ 1, 1, 0, 0 ],
+            [ 0, 0, 0, 1 ],
+            [ 0, 0, 1, 0 ],
+            [ 0, 1, 0, 0 ],
+            [ 1, 0, 0, 0 ],
+            [ 0, 1, 0, 0 ],
+            [ 1, 0, 0, 0 ],
+            [ 0, 0, 0, 1 ],
+            [ 1, 0, 0, 0 ],
         ];    
     }    
 
