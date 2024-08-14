@@ -1,4 +1,4 @@
-import Game from "./game.js";
+import Game from "game.js";
 const game = new Game(  
     [
         [ 0, 0, 1, 1 ],
