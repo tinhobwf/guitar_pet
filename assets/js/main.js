@@ -1,108 +1,105 @@
-class Matrix {
-    constructor(){
-        this.matriz = [
+import Game from "./game.js";
+const game = new Game(  
+    [
+        [ 1, 0, 0, 0 ],
+        [ 0, 1, 0, 0 ],
+        [ 0, 0, 1, 0 ],
+        [ 0, 0, 0, 1 ],
+    ], 
+    [
+        15.80,
+        15.90,
 
-        ];
-    }
-}
+        16.00,
+        16.10,
+        16.20,
+        16.30,
+        16.40,
+        16.50, 
+        16.60, 
+        16.70, 
+        16.80, 
+        16.90, 
 
-class Position {
-    constructor(arr){
-        this.pos0 = false;
-        this.pos1 = false;
-        this.pos2 = false;
-        this.pos3 = false;
-    }
-}
+        17.00, 
+        17.10, 
+        17.20, 
+        17.30, 
+        17.40, 
+        17.50, 
+        17.60, 
+        17.70, 
+        17.90,
 
+        18.10,
+        18.30,
+        18.50,
+        18.70,
+        18.90,
 
-class Game {
-    constructor(){
-        this.gerador = document.querySelectorAll('.gerador');
-        this.SheetsGeradas = document.querySelector('.Sheet');
-        this.points = document.querySelector('#points');
+        19.10,
+        19.30,
+        19.50,
+        19.70,
+        19.90,
 
-        this.count = 0;
-        this.gravityVelocity = 0;
+        20.10,
+        20.30,
+        20.50,
+        20.70,
+        20.90,
 
-        this.positionsOfMatriz = [];
-        this.matriz = [
-            [ 1, 1, 0, 0],
-            [ 0, 0, 0, 1],
-            [ 0, 0, 1, 0],
-            [ 0, 1, 0, 0],
-            [ 1, 0, 0, 0],
-            [ 0, 1, 0, 0],
-            [ 1, 0, 0, 0],
-            [ 0, 0, 0, 1],
-            [ 1, 0, 0, 0],
-        ];    
-    }    
+        21.10,
+        21.30,
+        21.50,
+        21.70,
+        21.90,
 
-    startGame(){
-        this.getPosition();
-        this.intervalSheet();
-    }      
-    
-    
-    getPosition(){
-        for(let i in this.matriz){
-            let posit = -1
-            
-            console.log("o array é: ", this.matriz[i])
-            for(let j of this.matriz[i]){
-                posit++
-                
-                if(j == true){
-                    this.positionsOfMatriz.push(posit);
-                }    
-                
-            }    
-            posit = 0;
-        }    
-    }    
-    
-    intervalSheet(){
-        setInterval(() => {
-            this.generatesSheet(this.positionsOfMatriz[this.count]);
-            this.count++;
-        }, 1000); 
-    }
+        22.10,
+        22.30,
+        22.50, 
+        22.70, 
+        22.90, 
 
-    generatesSheet(arg){
-        let d = document.createElement('div');
-        d.setAttribute('class', 'partitura');
+        23.10, 
+        23.30, 
+        23.50, 
+        23.70, 
+        23.90,
+
+        24.10,
+        24.30,
+        24.50,
+        24.70,
+        24.90,
+
+        25.10,
+        25.30,
+        25.50,
+        25.70,
+        25.90,
+
+        26.10,
+        26.30,
+        26.50,
+        26.70,
+        26.90,
+
+        27.10,
+        27.30,
+        27.50,
+        27.70,
+        27.90,
         
-        this.gravity(d);
-        
-        this.gerador[arg].appendChild(d);
-    }    
+        28.10,
 
-    
-    gravity(arg){ 
-        this.intervalgravity(arg, 10) //AQUI EU POSO ADICIONAR A VELOCIDADE DA GRAVIDADE DE ACORDO COM A DIFICULDADE
-    }
-    
-    intervalgravity(arg, velocity){
-        let count = 0;
-        setInterval(() => {
-            arg.style.top = `${count++}%`;
-            if(count >= 100){
-                clearInterval();
-                this.deleteSheet(arg);
-                arg.style.top = `10%`;
-            }
-        }, velocity);
-    }
+    ]
+);
 
-    deleteSheet(arg){
-        if(arg.style.top >= '100%'){
-           arg.style.display = 'none'
-        }    
-    }    
-
-}    
-
-let uhuh = new Game()
-uhuh.startGame();
-
+let x = document.querySelector('.staaaaart');
+let audio = document.querySelector('.audio')
+x.addEventListener('click', () => {
+    audio.play();
+    game.startGame();
+    x.style.display = 'none'
+})
