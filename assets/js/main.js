@@ -95,11 +95,3 @@ const game = new Game(
 
     ]
 );
-
-let x = document.querySelector('.staaaaart');
-let audio = document.querySelector('.audio')
-x.addEventListener('click', () => {
-    audio.play();
-    game.startGame();
-    x.style.display = 'none'
-})

@@ -97,6 +97,27 @@ body{
     
     transform: translateX(-15px);
     margin: 2px;
+    z-index: 2px;
+}
+
+.green{
+    background-color: green;
+}
+
+.red{
+    background-color: red;
+}
+
+.yellow{
+    background-color: yellow;
+}
+
+.blue{
+    background-color: blue;
+}
+
+#active{
+    background-color: rgb(146, 146, 146);
 }
 
 .green{
