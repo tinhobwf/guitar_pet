@@ -1,131 +1,109 @@
 export default class Game {
-    constructor(matriz, velocity){
+    constructor(matriz, time, music){
+        this.game = document.querySelector('.game');
         this.gerador = document.querySelectorAll('.gerador');
         this.pointsHTML = document.querySelector('#points');
         this.clickers = document.querySelectorAll('.clicker');
-        this.audio = document.querySelector('.audio')
-        this.points = 0;
+        this.partituras = document.querySelectorAll('.partitura');
+        this.audio = document.querySelector('#song');
         this.sheetGreen = null;
         this.sheetRed = null;
         this.sheetYellow = null;
         this.sheetBlue = null;
+        this.points = 0;
         this.count = 0;
         this.matriz = matriz;
-        this.velocity = velocity
-    }    
-
+        this.time = time;
+        this.music = music;
+    }  
+    
     startGame(){
-        this.sequenceNotes();
+        this.choiceMusic(this.music);
+        this.sequenceNotes(this.matriz);
         this.detectedTouch();
+        this.analyzeSheets();
     } 
     
-    sequenceNotes(){
-        //o 1º parametro é o tempo que as notas vao surgir (EM SEGUNDOS). 0 2º é o índice da matriz que vai ser tocado
-        this.timeoutSheet(this.velocity[0], this.matriz[3]); 
-        this.timeoutSheet(this.velocity[1], this.matriz[3]); 
-        this.timeoutSheet(this.velocity[2], this.matriz[3]); 
-        this.timeoutSheet(this.velocity[3], this.matriz[3]); 
-        this.timeoutSheet(this.velocity[4], this.matriz[3]); 
-        this.timeoutSheet(this.velocity[5], this.matriz[3]); 
-        this.timeoutSheet(this.velocity[6], this.matriz[3]); 
-        this.timeoutSheet(this.velocity[7], this.matriz[3]); 
-        this.timeoutSheet(this.velocity[8], this.matriz[3]); 
-        this.timeoutSheet(this.velocity[9], this.matriz[3]); 
-        this.timeoutSheet(this.velocity[10], this.matriz[3]); 
-        this.timeoutSheet(this.velocity[11], this.matriz[3]); 
-        this.timeoutSheet(this.velocity[12], this.matriz[3]); 
-        this.timeoutSheet(this.velocity[13], this.matriz[3]); 
-        this.timeoutSheet(this.velocity[14], this.matriz[3]); 
-        this.timeoutSheet(this.velocity[15], this.matriz[3]); 
-        this.timeoutSheet(this.velocity[16], this.matriz[3]); 
-        this.timeoutSheet(this.velocity[17], this.matriz[3]); 
-        this.timeoutSheet(this.velocity[18], this.matriz[3]); 
-
-        this.timeoutSheet(this.velocity[19], this.matriz[0]); 
-        this.timeoutSheet(this.velocity[20], this.matriz[1]); 
-        this.timeoutSheet(this.velocity[21], this.matriz[0]); 
-        this.timeoutSheet(this.velocity[22], this.matriz[1]); 
-        this.timeoutSheet(this.velocity[23], this.matriz[2]); 
+    choiceMusic(music){
+        const sourc = document.createElement('source');
+        [['src', `./assets/audio/${music}.mp3`], ['type', 'audio/mp3']].forEach(([key, value]) => sourc.setAttribute(key, value));
+        this.audio.appendChild(sourc);
         
-        this.timeoutSheet(this.velocity[24], this.matriz[1]); 
-        this.timeoutSheet(this.velocity[25], this.matriz[2]); 
-        this.timeoutSheet(this.velocity[26], this.matriz[1]); 
-        this.timeoutSheet(this.velocity[27], this.matriz[2]); 
-
-        this.timeoutSheet(this.velocity[28], this.matriz[0]); 
-        this.timeoutSheet(this.velocity[29], this.matriz[1]); 
-        this.timeoutSheet(this.velocity[30], this.matriz[0]); 
-        this.timeoutSheet(this.velocity[31], this.matriz[1]); 
-
-
-        this.timeoutSheet(this.velocity[32], this.matriz[2]); 
-        this.timeoutSheet(this.velocity[33], this.matriz[1]); 
-        this.timeoutSheet(this.velocity[34], this.matriz[2]); 
-        this.timeoutSheet(this.velocity[35], this.matriz[1]); 
-        this.timeoutSheet(this.velocity[36], this.matriz[2]); 
-        
-        this.timeoutSheet(this.velocity[37], this.matriz[0]); 
-        this.timeoutSheet(this.velocity[38], this.matriz[1]); 
-        this.timeoutSheet(this.velocity[39], this.matriz[0]); 
-        this.timeoutSheet(this.velocity[40], this.matriz[1]); 
-
-        this.timeoutSheet(this.velocity[41], this.matriz[2]); 
-        this.timeoutSheet(this.velocity[42], this.matriz[1]); 
-        this.timeoutSheet(this.velocity[43], this.matriz[2]); 
-        this.timeoutSheet(this.velocity[44], this.matriz[1]); 
-
+        // sourc.setAttribute('src', `./assets/audio/${music}.mp3`);
+        // sourc.setAttribute('type', 'audio/mp3');
+    }
+    
+    sequenceNotes(matriz){
+        for(let i in matriz){       
+            //o 1º parametro é o tempo que as notas vao surgir (EM SEGUNDOS). 0 2º é o índice da matriz que vai ser tocado
+            this.timeoutSheet(this.time[i] - 0.80, matriz[i]); 
+        }
     }
 
     detectedTouch(){
-        document.addEventListener('keydown' , (e) => {
-            
-
+        document.addEventListener('keydown', (e) => {
             this.sheetGreen = document.querySelectorAll('.green');
             this.sheetRed = document.querySelectorAll('.red');
             this.sheetYellow = document.querySelectorAll('.yellow');
             this.sheetBlue = document.querySelectorAll('.blue');
 
-            let k = e.key
+            let k = e.key;
 
-            k === 'd' || k === 'D' ? this.sistemOfPoints(this.sheetGreen, this.clickers[0]) : false;
+            k === 'a' || k === 'A' ? this.sistemOfPoints(this.sheetGreen, this.clickers[0]) : false;
 
-            k === 'f' || k == 'F' ? this.sistemOfPoints(this.sheetRed, this.clickers[1]) : false;
+            k === 's' || k == 'S' ? this.sistemOfPoints(this.sheetRed, this.clickers[1]) : false;
 
-            k === 'h' || k === 'H' ? this.sistemOfPoints(this.sheetYellow, this.clickers[2]) : false;
+            k === 'j' || k === 'J' ? this.sistemOfPoints(this.sheetYellow, this.clickers[2]) : false;
             
-            k === 'j' || k === 'J' ? this.sistemOfPoints(this.sheetBlue, this.clickers[3]) : false;
-
-            this.pointsHTML.innerHTML = this.points;
-            
+            k === 'k' || k === 'K' ? this.sistemOfPoints(this.sheetBlue, this.clickers[3]) : false;        
         });
 
-        document.addEventListener('keyup' , (e) => {
-            let k = e.key
+        document.addEventListener('keyup', (e) => { //estilinho de VIADO nos clicker aqui
+            let k = e.key;
 
-            k === 'd' || k === 'D' ? this.clickers[0].removeAttribute('id') : false;
+            k === 'a' || k === 'A' ? this.clickers[0].removeAttribute('id') : false;
 
-            k === 'f' || k == 'F' ?  this.clickers[1].removeAttribute('id') : false;
+            k === 's' || k == 'S' ?  this.clickers[1].removeAttribute('id') : false;
 
-            k === 'h' || k === 'H' ? this.clickers[2].removeAttribute('id') : false;
+            k === 'j' || k === 'J' ? this.clickers[2].removeAttribute('id') : false;
             
-            k === 'j' || k === 'J' ? this.clickers[3].removeAttribute('id') : false;
-        })
+            k === 'k' || k === 'K' ? this.clickers[3].removeAttribute('id') : false;
+
+        });
     }
 
     sistemOfPoints(sheetColor, clicker){
-        clicker.setAttribute('id', 'active')
+        clicker.setAttribute('id', 'active');
 
-        if(sheetColor[0].style.top >= '87%' && sheetColor[0].style.top <= '93%'){
-            sheetColor[0].removeAttribute('class');
-            this.points += 1000
-        }
-        if(sheetColor[0].style.top < '87%'){
-            this.points -= 100
+        if(sheetColor[0]){
+            if(sheetColor[0].style.top >= '80%' && sheetColor[0].style.top <= '95%'){
+                sheetColor[0].removeAttribute('class');
+                this.points += 500;
+            }
+
+            if(sheetColor[0].style.top < '70%'){
+                this.points -= 100;
+            }
         }
     }
-    
 
-    timeoutSheet(tempo, sheetPositionArray){
+    analyzeSheets(){
+        setInterval(()=>{
+            this.partituras = document.querySelectorAll('.partitura'); //ATUALIZO A CADA MILESIMO TODAS AS PARTITURAS QUE ESTAO NA TELA
+
+            console.log(this.partituras)
+            for(let i of this.partituras){
+                if(i.style.top == '100%'){
+                    i.parentNode.removeChild(i), //DELETA AQUI
+                    this.points -= 500; //tira os pontos
+                }
+            }
+
+            this.pointsHTML.innerHTML = this.points; //adiciona os pontos a cada milesimo
+        }, 0.1)
+    }
+    
+    timeoutSheet(tempo, sheetPositionArray){ //gera as notas de acordo com a matriz.
         setTimeout(() => {
             if(sheetPositionArray[0] === 1) this.generatesSheet(0) 
 
@@ -168,9 +146,8 @@ export default class Game {
         this.gerador[position].appendChild(box);
     }
 
-    gravity(partitura, dificulty){ 
-        this.intervalgravity(partitura, 10, false) // 1º parametro é a partitura gerada. 2º é a velocidade que as partituras caem. 3º é necessario ser 'true' caso voce vá executar essa funçao novamente.
-        this.intervalgravity(partitura, 1, true)
+    gravity(partitura){ 
+        this.intervalgravity(partitura, 10, false)
         //MODIFIQUE A GRAVIDADE AQUI...
     }
     
@@ -179,24 +156,8 @@ export default class Game {
 
         let inter = setInterval(() => {
             box.style.top = `${count++}%`; //adiciono % do top a cada velocidade setada.
-            if(count >= 100){
-                clearInterval(inter);
-                this.deleteSheet(box);
-
-                this.points -= 300;
-                this.pointsHTML.innerHTML = this.points;
-            }
         }, velocity);
 
-        
-
         disable ? clearInterval(inter) : false; //caso o parametro 'disable' seja true o seiinterval vai parar.
-        
     }
-
-    deleteSheet(box) { 
-        box.removeAttribute('class')
-        box.style.top >= '100%' ? box.style.display = 'none': false;  //adiciono um 'display:none;' na caixa, fazendo assim ela sumir
-    } 
 }    
-
